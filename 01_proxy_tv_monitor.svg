@@ -1,0 +1,67 @@
+<svg id="svg-01" class="w-28 h-28 text-white animate-zzz-pulse" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    @keyframes zzzPulse {
+                        0%, 100% { filter: drop-shadow(0 0 2px rgba(232,255,0,0.4)); }
+                        50% { filter: drop-shadow(0 0 12px rgba(232,255,0,0.85)); }
+                    }
+                    @keyframes zzzGlitch {
+                        0%, 100% { transform: translate(0, 0) skew(0deg); }
+                        10% { transform: translate(-1px, 1px) skew(-2deg); }
+                        20% { transform: translate(1px, -1px) skew(2deg); }
+                        30% { transform: translate(0, 0) skew(0deg); }
+                        80% { transform: translate(1px, 1px) skew(1deg); }
+                        90% { transform: translate(-1px, -1px) skew(-1deg); }
+                    }
+                    @keyframes zzzSpin {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+                    @keyframes zzzFloat {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-4px); }
+                    }
+                    @keyframes zzzSpray {
+                        0% { transform: scale(0.6) translate(0, 0); opacity: 0; }
+                        50% { transform: scale(1.1) translate(-6px, -6px); opacity: 0.8; }
+                        100% { transform: scale(1.3) translate(-12px, -12px); opacity: 0; }
+                    }
+                    @keyframes zzzBeat {
+                        0%, 100% { transform: scale(1); }
+                        30% { transform: scale(1.15); }
+                        60% { transform: scale(0.95); }
+                    }
+                    @keyframes zzzWave {
+                        0%, 100% { transform: scaleY(0.4); }
+                        50% { transform: scaleY(1.1); }
+                    }
+                    .animate-zzz-pulse { animation: zzzPulse 2s infinite ease-in-out; }
+                    .animate-zzz-glitch { animation: zzzGlitch 1.5s infinite steps(2); }
+                    .animate-zzz-spin { transform-origin: 50% 50%; animation: zzzSpin 12s infinite linear; }
+                    .animate-zzz-spin-fast { transform-origin: 50% 50%; animation: zzzSpin 3s infinite linear; }
+                    .animate-zzz-float { animation: zzzFloat 3s infinite ease-in-out; }
+                    .animate-zzz-spray { transform-origin: 30% 30%; animation: zzzSpray 1.8s infinite ease-out; }
+                    .animate-zzz-beat { transform-origin: 50% 50%; animation: zzzBeat 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1); }
+                    .animate-wave-1 { transform-origin: bottom; animation: zzzWave 0.6s infinite ease-in-out alternate; }
+                    .animate-wave-2 { transform-origin: bottom; animation: zzzWave 0.8s infinite ease-in-out alternate; }
+                    .animate-wave-3 { transform-origin: bottom; animation: zzzWave 0.5s infinite ease-in-out alternate; }
+                </style>
+            
+                            <!-- TV Case -->
+                            <rect x="15" y="25" width="70" height="52" rx="10" stroke="#E8FF00" stroke-width="4.5" fill="#141419"></rect>
+                            <!-- Bottom Stand base -->
+                            <path d="M35 77 L25 88 H75 L65 77 Z" stroke="#E8FF00" stroke-width="4" stroke-linejoin="round" fill="#111"></path>
+                            <!-- Antennas with neon details -->
+                            <line x1="30" y1="12" x2="42" y2="25" stroke="#FF0055" stroke-width="4.5" stroke-linecap="round"></line>
+                            <circle cx="30" cy="12" r="3.5" fill="#FF0055"></circle>
+                            <line x1="70" y1="12" x2="58" y2="25" stroke="#E8FF00" stroke-width="4.5" stroke-linecap="round"></line>
+                            <circle cx="70" cy="12" r="3.5" fill="#E8FF00"></circle>
+                            <!-- Screen scan lines (animated on hover) -->
+                            <g class="opacity-80">
+                                <line class="animate-zzz-glitch" x1="22" y1="35" x2="78" y2="35" stroke="#E8FF00" stroke-width="1.5" stroke-dasharray="4 4"></line>
+                                <line class="animate-zzz-glitch" x1="22" y1="47" x2="78" y2="47" stroke="#E8FF00" stroke-width="1.5"></line>
+                                <line class="animate-zzz-glitch" x1="22" y1="60" x2="78" y2="60" stroke="#FF0055" stroke-width="1.5" stroke-dasharray="6 2"></line>
+                            </g>
+                            <!-- Bangboo stylized facial waveform inside screen -->
+                            <path d="M28 53 L38 53 L42 42 L48 64 L53 53 L62 53" stroke="#E8FF00" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" class="animate-wave-2"></path>
+                            <circle cx="68" cy="53" r="4" fill="#FF0055" class="animate-zzz-beat"></circle>
+                        </svg>
