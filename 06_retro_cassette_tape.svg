@@ -51,8 +51,10 @@
                             <!-- Bottom tape protector block -->
                             <path d="M26 73 L32 64 H68 L74 73 Z" fill="#27272a" stroke="#E8FF00" stroke-width="3.5" stroke-linejoin="round"></path>
 
+                            
                             <!-- Middle sticker/label -->
                             <rect x="23" y="33" width="54" height="22" rx="3" fill="#FF0055"></rect>
+                            
 
                             <!-- Left spinning gear -->
                             <circle cx="38" cy="44" r="8" fill="#121214" stroke="#E8FF00" stroke-width="3"></circle>

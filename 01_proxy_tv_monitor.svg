@@ -46,6 +46,8 @@
                     .animate-wave-3 { transform-origin: bottom; animation: zzzWave 0.5s infinite ease-in-out alternate; }
                 </style>
 
+
+
                             <!-- TV Case -->
                             <rect x="15" y="25" width="70" height="52" rx="10" stroke="#E8FF00" stroke-width="4.5" fill="#141419"></rect>
                             <!-- Bottom Stand base -->

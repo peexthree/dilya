@@ -46,9 +46,11 @@
                     .animate-wave-3 { transform-origin: bottom; animation: zzzWave 0.5s infinite ease-in-out alternate; }
                 </style>
 
+            
                             <!-- Background spinning tech-circle -->
                             <circle cx="50" cy="50" r="35" stroke="#27272a" stroke-width="2" stroke-dasharray="8 6"></circle>
                             <circle cx="50" cy="50" r="28" stroke="#E8FF00" stroke-width="1.5" stroke-dasharray="40 10" class="animate-zzz-spin"></circle>
+                            
 
                             <!-- Paint Brush -->
                             <g class="animate-zzz-float">
