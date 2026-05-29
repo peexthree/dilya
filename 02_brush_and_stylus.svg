@@ -1,0 +1,73 @@
+<svg id="svg-02" class="w-28 h-28 text-white animate-zzz-pulse" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    @keyframes zzzPulse {
+                        0%, 100% { filter: drop-shadow(0 0 2px rgba(232,255,0,0.4)); }
+                        50% { filter: drop-shadow(0 0 12px rgba(232,255,0,0.85)); }
+                    }
+                    @keyframes zzzGlitch {
+                        0%, 100% { transform: translate(0, 0) skew(0deg); }
+                        10% { transform: translate(-1px, 1px) skew(-2deg); }
+                        20% { transform: translate(1px, -1px) skew(2deg); }
+                        30% { transform: translate(0, 0) skew(0deg); }
+                        80% { transform: translate(1px, 1px) skew(1deg); }
+                        90% { transform: translate(-1px, -1px) skew(-1deg); }
+                    }
+                    @keyframes zzzSpin {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+                    @keyframes zzzFloat {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-4px); }
+                    }
+                    @keyframes zzzSpray {
+                        0% { transform: scale(0.6) translate(0, 0); opacity: 0; }
+                        50% { transform: scale(1.1) translate(-6px, -6px); opacity: 0.8; }
+                        100% { transform: scale(1.3) translate(-12px, -12px); opacity: 0; }
+                    }
+                    @keyframes zzzBeat {
+                        0%, 100% { transform: scale(1); }
+                        30% { transform: scale(1.15); }
+                        60% { transform: scale(0.95); }
+                    }
+                    @keyframes zzzWave {
+                        0%, 100% { transform: scaleY(0.4); }
+                        50% { transform: scaleY(1.1); }
+                    }
+                    .animate-zzz-pulse { animation: zzzPulse 2s infinite ease-in-out; }
+                    .animate-zzz-glitch { animation: zzzGlitch 1.5s infinite steps(2); }
+                    .animate-zzz-spin { transform-origin: 50% 50%; animation: zzzSpin 12s infinite linear; }
+                    .animate-zzz-spin-fast { transform-origin: 50% 50%; animation: zzzSpin 3s infinite linear; }
+                    .animate-zzz-float { animation: zzzFloat 3s infinite ease-in-out; }
+                    .animate-zzz-spray { transform-origin: 30% 30%; animation: zzzSpray 1.8s infinite ease-out; }
+                    .animate-zzz-beat { transform-origin: 50% 50%; animation: zzzBeat 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1); }
+                    .animate-wave-1 { transform-origin: bottom; animation: zzzWave 0.6s infinite ease-in-out alternate; }
+                    .animate-wave-2 { transform-origin: bottom; animation: zzzWave 0.8s infinite ease-in-out alternate; }
+                    .animate-wave-3 { transform-origin: bottom; animation: zzzWave 0.5s infinite ease-in-out alternate; }
+                </style>
+
+                            <!-- Background spinning tech-circle -->
+                            <circle cx="50" cy="50" r="35" stroke="#27272a" stroke-width="2" stroke-dasharray="8 6"></circle>
+                            <circle cx="50" cy="50" r="28" stroke="#E8FF00" stroke-width="1.5" stroke-dasharray="40 10" class="animate-zzz-spin"></circle>
+
+                            <!-- Paint Brush -->
+                            <g class="animate-zzz-float">
+                                <!-- Stylus body diagonally crossed -->
+                                <path d="M22 78 L58 42" stroke="#E8FF00" stroke-width="6" stroke-linecap="round"></path>
+                                <path d="M58 42 L72 28 C74 26, 76 26, 78 28 C80 30, 80 32, 78 34 L64 48" stroke="#FF0055" stroke-width="6" stroke-linecap="round"></path>
+                                <!-- Brush tip -->
+                                <path d="M78 28 C84 22, 84 16, 76 18 C68 20, 72 26, 78 28 Z" fill="#FF0055"></path>
+                            </g>
+
+                            <!-- Digital Stylus Pen -->
+                            <g class="animate-zzz-float" style="animation-delay: 1.5s;">
+                                <path d="M78 78 L42 42" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path>
+                                <path d="M42 42 L25 25 L22 32 Z" fill="#E8FF00" stroke="#E8FF00" stroke-width="2"></path>
+                                <!-- Stylus nib laser glow -->
+                                <circle cx="21" cy="21" r="2.5" fill="#E8FF00" class="animate-zzz-beat"></circle>
+                            </g>
+
+                            <!-- Cyber sparks around tip -->
+                            <path d="M50 15 L50 21" stroke="#E8FF00" stroke-width="2.5" stroke-linecap="round" class="animate-zzz-glitch"></path>
+                            <path d="M15 50 L21 50" stroke="#FF0055" stroke-width="2.5" stroke-linecap="round" class="animate-zzz-glitch"></path>
+                        </svg>

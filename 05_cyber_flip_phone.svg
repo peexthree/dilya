@@ -1,0 +1,72 @@
+<svg id="svg-05" class="w-28 h-28 text-white animate-zzz-pulse" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    @keyframes zzzPulse {
+                        0%, 100% { filter: drop-shadow(0 0 2px rgba(232,255,0,0.4)); }
+                        50% { filter: drop-shadow(0 0 12px rgba(232,255,0,0.85)); }
+                    }
+                    @keyframes zzzGlitch {
+                        0%, 100% { transform: translate(0, 0) skew(0deg); }
+                        10% { transform: translate(-1px, 1px) skew(-2deg); }
+                        20% { transform: translate(1px, -1px) skew(2deg); }
+                        30% { transform: translate(0, 0) skew(0deg); }
+                        80% { transform: translate(1px, 1px) skew(1deg); }
+                        90% { transform: translate(-1px, -1px) skew(-1deg); }
+                    }
+                    @keyframes zzzSpin {
+                        from { transform: rotate(0deg); }
+                        to { transform: rotate(360deg); }
+                    }
+                    @keyframes zzzFloat {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-4px); }
+                    }
+                    @keyframes zzzSpray {
+                        0% { transform: scale(0.6) translate(0, 0); opacity: 0; }
+                        50% { transform: scale(1.1) translate(-6px, -6px); opacity: 0.8; }
+                        100% { transform: scale(1.3) translate(-12px, -12px); opacity: 0; }
+                    }
+                    @keyframes zzzBeat {
+                        0%, 100% { transform: scale(1); }
+                        30% { transform: scale(1.15); }
+                        60% { transform: scale(0.95); }
+                    }
+                    @keyframes zzzWave {
+                        0%, 100% { transform: scaleY(0.4); }
+                        50% { transform: scaleY(1.1); }
+                    }
+                    .animate-zzz-pulse { animation: zzzPulse 2s infinite ease-in-out; }
+                    .animate-zzz-glitch { animation: zzzGlitch 1.5s infinite steps(2); }
+                    .animate-zzz-spin { transform-origin: 50% 50%; animation: zzzSpin 12s infinite linear; }
+                    .animate-zzz-spin-fast { transform-origin: 50% 50%; animation: zzzSpin 3s infinite linear; }
+                    .animate-zzz-float { animation: zzzFloat 3s infinite ease-in-out; }
+                    .animate-zzz-spray { transform-origin: 30% 30%; animation: zzzSpray 1.8s infinite ease-out; }
+                    .animate-zzz-beat { transform-origin: 50% 50%; animation: zzzBeat 1.2s infinite cubic-bezier(0.25, 0.8, 0.25, 1); }
+                    .animate-wave-1 { transform-origin: bottom; animation: zzzWave 0.6s infinite ease-in-out alternate; }
+                    .animate-wave-2 { transform-origin: bottom; animation: zzzWave 0.8s infinite ease-in-out alternate; }
+                    .animate-wave-3 { transform-origin: bottom; animation: zzzWave 0.5s infinite ease-in-out alternate; }
+                </style>
+
+                            <!-- Retractable Cyber Antenna -->
+                            <line x1="32" y1="18" x2="32" y2="35" stroke="#FF0055" stroke-width="4.5" stroke-linecap="round" class="animate-zzz-glitch"></line>
+                            <circle cx="32" cy="14" r="3" fill="#FF0055"></circle>
+
+                            <!-- Flip-phone top screen base -->
+                            <rect x="25" y="32" width="50" height="48" rx="8" fill="#141419" stroke="#E8FF00" stroke-width="4.5" class="animate-zzz-float"></rect>
+                            <!-- Inner glowing grid screen -->
+                            <rect x="33" y="39" width="34" height="26" rx="3" fill="#121214" stroke="#E8FF00" stroke-width="2.5"></rect>
+
+                            <!-- Live Chat message popup on flip phone -->
+                            <g class="animate-zzz-beat">
+                                <rect x="42" y="44" width="16" height="12" rx="2" fill="#FF0055"></rect>
+                                <polygon points="50,56 46,60 48,56" fill="#FF0055"></polygon>
+                                <!-- Heart shape inside message -->
+                                <path d="M50 51 C50 51, 48.5 48, 47 49.5 C46 51, 50 53, 50 53 C50 53, 54 51, 53 49.5 C51.5 48, 50 51, 50 51 Z" fill="#FFFFFF"></path>
+                            </g>
+
+                            <!-- Keypad details under phone hinge -->
+                            <path d="M25 80 L35 90 H65 L75 80 Z" stroke="#E8FF00" stroke-width="4" stroke-linejoin="round" fill="#18181b"></path>
+                            <!-- Mini keypad dots -->
+                            <circle cx="42" cy="85" r="1.5" fill="#E8FF00"></circle>
+                            <circle cx="50" cy="85" r="1.5" fill="#FFFFFF"></circle>
+                            <circle cx="58" cy="85" r="1.5" fill="#E8FF00"></circle>
+                        </svg>
