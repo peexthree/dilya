@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ахметова Дилара Рамилевна | Портфолио художника</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500&display=swap');
+    
+    @page { 
+      size: A4 portrait; 
+      margin: 1.5cm; 
+    }
+    
+    body { 
+      font-family: 'Inter', sans-serif; 
+    }
+    h1, h2, h3 { 
+      font-family: 'Playfair Display', serif; 
+    }
+
+    /* === ОСНОВНЫЕ СТИЛИ ДЛЯ ПЕЧАТИ === */
+    @media print {
+      .page-break { page-break-before: always; }
+      .no-break { break-inside: avoid; }
+      .art-card { break-inside: avoid; }
+      
+      img {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+      }
+      
+      .max-w-5xl, .max-w-4xl {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      
+      .py-24, .py-20, .mb-24, .mb-20 { 
+        padding-top: 1.2rem !important; 
+        padding-bottom: 1.2rem !important; 
+        margin-bottom: 1.5rem !important;
+      }
+      
+      h2 { font-size: 2.4rem !important; }
+      h3 { font-size: 1.8rem !important; }
+      
+      .text-5xl { font-size: 2.8rem !important; }
+      .text-4xl { font-size: 2.2rem !important; }
+    }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900">
+
+  <!-- Обложка -->
+  <div class="min-h-[100vh] flex items-center justify-center relative bg-zinc-900 text-white overflow-hidden">
+    <img src="Рисунок1.jpg" alt="Дилара Ахметова" class="absolute inset-0 w-full h-full object-cover brightness-75">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black/90"></div>
+    <div class="relative z-10 text-center px-8 max-w-2xl">
+      <h1 class="text-7xl md:text-8xl font-bold tracking-tighter">АХМЕТОВА</h1>
+      <p class="text-4xl mt-3 text-amber-300">Дилара Рамилевна</p>
+      <div class="h-px bg-amber-300 w-28 mx-auto my-8"></div>
+      <p class="text-5xl font-light tracking-wide">Художник • Портфолио</p>
+    </div>
+  </div>
+
+  <!-- О художнике -->
+  <div class="max-w-4xl mx-auto py-20 px-10 page-break">
+    <h2 class="text-5xl font-semibold mb-10 border-b border-amber-400 pb-4">О художнике</h2>
+    <p class="text-xl leading-relaxed text-zinc-700">
+      Ахметова Дилара Рамилевна — выпускница Художественно-графического факультета 
+      БГПУ им. М. Акмуллы (2022, специальность «Изобразительное искусство и черчение»).<br><br>
+      Работает в классических и современных техниках: масло, акварель, акрил, графика, 
+      карандаш, декоративная роспись по дереву и ткани, батик. 
+      Специализируется на портретах, фигуративной живописи, натюрмортах и 
+      декоративно-прикладном искусстве. Имеет опыт преподавания ИЗО и проведения мастер-классов.
+    </p>
+  </div>
+
+  <!-- Галерея -->
+  <div class="max-w-5xl mx-auto px-10 pb-12">
+
+    <h2 class="text-4xl font-semibold mb-14 text-center">Работы</h2>
+
+    <!-- Академический рисунок -->
+    <div class="mb-16 no-break">
+      <h3 class="text-3xl mb-8 text-amber-500 border-l-4 border-amber-400 pl-4">Академический рисунок</h3>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-12">
+        <div class="art-card"><img src="Рисунок5.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Мужской ню • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок6.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Венера Милосская • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок7.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Портрет в традиционной одежде • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок8.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Дама за столиком • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок10.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Портрет мальчика • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок4.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Натюрморт с птицей • Карандаш</p></div>
+      </div>
+    </div>
+
+    <!-- Натюрморты -->
+    <div class="mb-16 page-break no-break">
+      <h3 class="text-3xl mb-8 text-amber-500 border-l-4 border-amber-400 pl-4">Натюрморты</h3>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-12">
+        <div class="art-card"><img src="Рисунок2.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Акварельный натюрморт • Акварель</p></div>
+        <div class="art-card"><img src="Рисунок3.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Натюрморт с кофейником • Масло</p></div>
+      </div>
+    </div>
+
+    <!-- Творческие -->
+    <div class="mb-16 page-break no-break">
+      <h3 class="text-3xl mb-8 text-amber-500 border-l-4 border-amber-400 pl-4">Творческие и фигуративные работы</h3>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-12">
+        <div class="art-card"><img src="Рисунок9.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Ангел с птицей • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок13.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Динамичная мужская фигура • Масло</p></div>
+      </div>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-12 mt-12">
+        <div class="art-card"><img src="Рисунок16.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Девушка и леопард (1) • Масло</p></div>
+        <div class="art-card"><img src="Рисунок17.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Девушка и леопард (2) • Масло</p></div>
+      </div>
+    </div>
+
+    <!-- Прикладное -->
+    <div class="page-break no-break">
+      <h3 class="text-3xl mb-8 text-amber-500 border-l-4 border-amber-400 pl-4">Прикладное и декоративное искусство</h3>
+      <div class="grid grid-cols-2 gap-x-8 gap-y-12">
+        <div class="art-card"><img src="Рисунок11.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Декоративный поднос • Роспись</p></div>
+        <div class="art-card"><img src="Рисунок12.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Городской пейзаж • Карандаш</p></div>
+        <div class="art-card"><img src="Рисунок14.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Мурал в детской комнате • Стеновая роспись</p></div>
+        <div class="art-card"><img src="Рисунок15.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium">Кастом джинсы «Хання» • Роспись ткани</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Футер -->
+  <div class="bg-zinc-900 text-white py-12 text-center">
+    <p class="text-2xl">Ахметова Дилара Рамилевна • Художник</p>
+    <p class="mt-5 text-lg">
+      📞 +7 965 654-09-35<br>
+      ✉️ akhmetova.dilara21@yandex.ru
+    </p>
+  </div>
+
+</body>
+</html>
