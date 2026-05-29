@@ -21,9 +21,19 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Inter:wght@300;400;500&display=swap');
     
+    :root {
+      --pastel-bg: #fdfbfb;
+      --pastel-accent: #f3e7e9;
+      --pastel-text: #4a4a4a;
+      --pastel-gold: #d4af37;
+    }
+
     @page { 
       size: A4 portrait; 
       margin: 1.5cm; 
@@ -31,113 +41,171 @@
     
     body { 
       font-family: 'Inter', sans-serif; 
+      background: var(--pastel-bg);
+      color: var(--pastel-text);
+      overflow-x: hidden;
     }
+
     h1, h2, h3 { 
       font-family: 'Playfair Display', serif; 
     }
 
+    /* Animated Mesh Background */
+    .mesh-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background:
+        radial-gradient(at 0% 0%, rgba(243, 231, 233, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(227, 238, 255, 0.5) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(238, 255, 231, 0.5) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(255, 231, 231, 0.5) 0px, transparent 50%);
+      filter: blur(100px);
+      animation: mesh-move 20s ease infinite alternate;
+    }
+
+    @keyframes mesh-move {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
     .art-card {
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
     }
     .art-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px) scale(1.02);
     }
     .art-card img {
-      transition: box-shadow 0.4s ease;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      transition: all 0.5s ease;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
     }
     .art-card:hover img {
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+      filter: brightness(1.05);
+    }
+
+    .art-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 1.5rem;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0);
+      transition: box-shadow 0.5s ease;
+      z-index: -1;
+    }
+    .art-card:hover::after {
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+
+    .hero-parallax {
+      transform: translateY(var(--scroll-y));
     }
 
     /* === ОСНОВНЫЕ СТИЛИ ДЛЯ ПЕЧАТИ === */
     @media print {
-      body { background-color: white !important; color: black !important; }
+      @page { margin: 1cm; }
+      body { background: white !important; color: black !important; font-size: 10pt !important; }
+      .mesh-gradient, nav, .animate-bounce, [data-aos] {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+      nav, .mesh-gradient, .animate-bounce { display: none !important; }
+
       .page-break { page-break-before: always; }
       .no-break { break-inside: avoid; }
-      .art-card { break-inside: avoid; page-break-inside: avoid; margin-bottom: 2rem; }
-
-      nav, .animate-bounce { display: none !important; }
+      .art-card { break-inside: avoid; margin-bottom: 1cm !important; }
 
       .min-h-\[100vh\] {
         min-height: 0 !important;
-        height: auto !important;
-        padding: 2cm 0 !important;
-        background: white !important;
-        color: black !important;
-      }
-      .min-h-\[100vh\] img { display: none !important; }
-      .min-h-\[100vh\] .bg-gradient-to-b { display: none !important; }
-      .min-h-\[100vh\] h1, .min-h-\[100vh\] p { color: black !important; }
-      
-      img {
-        max-width: 100% !important;
-        height: auto !important;
-        object-fit: contain !important;
-        border: 1px solid #eee !important;
-      }
-      
-      .max-w-5xl, .max-w-4xl {
-        max-width: 100% !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      
-      .py-16, .py-20, .py-24, .pb-20 {
-        padding-top: 1rem !important;
-        padding-bottom: 1rem !important;
-      }
-      
-      h2 { font-size: 2rem !important; margin-bottom: 1rem !important; color: black !important; }
-      h3 { font-size: 1.5rem !important; margin-bottom: 1rem !important; color: #444 !important; }
-
-      .text-zinc-700, .text-zinc-600 { color: #333 !important; }
-
-      footer {
-        background: white !important;
-        color: black !important;
-        border-top: 1px solid #ccc !important;
         padding: 1cm 0 !important;
+        background: transparent !important;
       }
-      footer a { text-decoration: none !important; color: black !important; }
-      footer .bg-zinc-800\/50 { background: transparent !important; border: 1px solid #eee !important; }
+      #hero-img { display: none !important; }
+      .min-h-\[100vh\] h1 { font-size: 40pt !important; margin-bottom: 0.5cm !important; }
+      .min-h-\[100vh\] p { font-size: 16pt !important; color: black !important; }
       
-      .grid { display: block !important; }
-      .art-card { width: 100% !important; margin-bottom: 1.5cm !important; }
+      .grid { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 0.5cm !important; }
+      .md\:col-span-7, .md\:col-span-5, .md\:col-span-6, .md\:col-span-4, .md\:col-span-8 { grid-column: span 1 !important; margin: 0 !important; }
+      
+      img { border: 1px solid #eee !important; max-height: 8cm !important; object-fit: contain !important; }
+      
+      h2 { font-size: 24pt !important; margin-top: 1cm !important; margin-bottom: 0.5cm !important; }
+      h3 { font-size: 14pt !important; margin-bottom: 0.3cm !important; color: #666 !important; }
+
+      footer { border-top: 1px solid #eee !important; padding-top: 1cm !important; }
+      footer .grid { grid-template-columns: repeat(4, 1fr) !important; }
+      footer a { border: none !important; padding: 0 !important; box-shadow: none !important; }
     }
   </style>
 </head>
-<body class="bg-zinc-50 text-zinc-900">
+<body class="text-zinc-900">
+  <div class="mesh-gradient"></div>
 
-  <!-- Навигация / Instagram -->
-  <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-end">
-    <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all p-3 rounded-full text-white flex items-center gap-2 border border-white/20 group">
-      <i data-lucide="instagram" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
-      <span class="text-sm font-medium hidden md:block">@demon_sitri21</span>
-    </a>
+  <!-- Навигация / Instagram & Telegram -->
+  <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center glass-nav">
+    <div class="flex items-center gap-2">
+      <span class="font-serif text-xl tracking-widest uppercase font-medium">Portfolio</span>
+    </div>
+    <div class="flex gap-3">
+      <a href="https://t.me/Dilara_Ramilevna12" target="_blank" class="bg-zinc-900/5 hover:bg-zinc-900/10 transition-all p-2.5 rounded-full flex items-center gap-2 border border-zinc-900/10 group">
+        <i data-lucide="send" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+      </a>
+      <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="bg-zinc-900/5 hover:bg-zinc-900/10 transition-all p-2.5 rounded-full flex items-center gap-2 border border-zinc-900/10 group">
+        <i data-lucide="instagram" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+      </a>
+      <button onclick="window.print()" class="bg-zinc-900 text-white hover:bg-zinc-800 transition-all px-4 py-2 rounded-full text-xs font-medium flex items-center gap-2">
+        <i data-lucide="download" class="w-4 h-4"></i>
+        <span>PDF</span>
+      </button>
+    </div>
   </nav>
 
   <!-- Обложка -->
-  <div class="min-h-[100vh] flex items-center justify-center relative bg-zinc-900 text-white overflow-hidden">
-    <img decoding="async" src="Рисунок1.jpg" alt="Дилара Ахметова" class="absolute inset-0 w-full h-full object-cover brightness-50 md:brightness-75 transition-all duration-700 hover:scale-105">
-    <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/90"></div>
-    <div class="relative z-10 text-center px-4 max-w-4xl">
-      <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-2">АХМЕТОВА</h1>
-      <p class="text-3xl md:text-5xl text-amber-300 font-medium">Дилара Рамилевна</p>
-      <div class="h-px bg-amber-300 w-24 md:w-32 mx-auto my-6 md:my-10 opacity-60"></div>
-      <p class="text-3xl md:text-5xl font-light tracking-wider uppercase opacity-90">Художник • Портфолио</p>
+  <div class="min-h-[100vh] flex items-center justify-center relative bg-zinc-100 text-zinc-900 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img decoding="async" src="Рисунок1.jpg" alt="Дилара Ахметова" class="w-full h-full object-cover object-[center_20%] scale-110 brightness-95" id="hero-img">
+      <div class="absolute inset-0 bg-white/20 backdrop-blur-[2px]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-zinc-50"></div>
+    </div>
 
-      <div class="mt-12 md:mt-16 animate-bounce opacity-50">
+    <div class="relative z-10 text-center px-4 max-w-5xl">
+      <div class="backdrop-blur-md bg-white/40 p-8 md:p-16 rounded-[3rem] border border-white/50 shadow-2xl inline-block transition-transform duration-1000 hover:scale-[1.02]" id="hero-content">
+        <h1 class="text-6xl md:text-9xl font-bold tracking-tighter mb-4 text-zinc-900" id="title-main">АХМЕТОВА</h1>
+        <p class="text-xl md:text-4xl text-zinc-800 font-light tracking-[0.2em] uppercase mb-8" id="title-sub">Дилара Рамилевна</p>
+
+        <div class="flex items-center justify-center gap-4 mb-8" id="title-tag">
+          <div class="h-[1px] bg-zinc-400 w-12 md:w-20"></div>
+          <p class="text-xs md:text-base font-semibold tracking-[0.3em] uppercase text-zinc-600">Artist & Designer</p>
+          <div class="h-[1px] bg-zinc-400 w-12 md:w-20"></div>
+        </div>
+      </div>
+
+      <div class="mt-12 animate-bounce opacity-40">
         <i data-lucide="chevron-down" class="w-8 h-8 mx-auto"></i>
       </div>
     </div>
   </div>
 
   <!-- О художнике -->
-  <div class="max-w-4xl mx-auto py-16 md:py-24 px-6 md:px-10 page-break">
-    <h2 class="text-4xl md:text-5xl font-semibold mb-8 md:mb-10 border-b border-amber-400 pb-4">О художнике</h2>
-    <p class="text-lg md:text-xl leading-relaxed text-zinc-700">
+  <div class="max-w-4xl mx-auto py-24 md:py-32 px-6 md:px-10 page-break" data-aos="fade-up">
+    <h2 class="text-4xl md:text-6xl font-serif mb-12 relative inline-block">
+      О художнике
+      <span class="absolute -bottom-2 left-0 w-24 h-1 bg-zinc-900/10"></span>
+    </h2>
+    <p class="text-xl md:text-2xl leading-relaxed text-zinc-600 font-light italic">
       Ахметова Дилара Рамилевна — выпускница Художественно-графического факультета 
       БГПУ им. М. Акмуллы (2022, специальность «Изобразительное искусство и черчение»).<br><br>
       Работает в классических и современных техниках: масло, акварель, акрил, графика, 
@@ -148,89 +216,141 @@
   </div>
 
   <!-- Галерея -->
-  <div class="max-w-5xl mx-auto px-6 md:px-10 pb-20">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 pb-32">
 
-    <h2 class="text-4xl md:text-5xl font-semibold mb-12 md:mb-16 text-center">Работы</h2>
+    <h2 class="text-5xl md:text-7xl font-serif mb-20 text-center tracking-tight" data-aos="fade-up">Portfolio</h2>
 
     <!-- Академический рисунок -->
-    <div class="mb-20 no-break">
-      <h3 class="text-2xl md:text-3xl mb-8 text-amber-600 border-l-4 border-amber-400 pl-4 font-medium italic">Академический рисунок</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок5.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Мужской ню • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок6.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Венера Милосская • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок7.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Портрет в традиционной одежде • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок8.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Дама за столиком • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок10.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Портрет мальчика • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок4.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Натюрморт с птицей • Карандаш</p></div>
+    <div class="mb-32 no-break">
+      <h3 class="text-xl md:text-2xl mb-12 text-zinc-400 tracking-widest uppercase text-center font-light" data-aos="fade-up">Академический рисунок</h3>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div class="md:col-span-7 art-card" data-aos="fade-right"><img loading="lazy" decoding="async" src="Рисунок5.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Мужской ню • Карандаш</p></div>
+        <div class="md:col-span-5 art-card md:mt-24" data-aos="fade-left"><img loading="lazy" decoding="async" src="Рисунок6.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Венера Милосская • Карандаш</p></div>
+        <div class="md:col-span-5 art-card" data-aos="fade-right"><img loading="lazy" decoding="async" src="Рисунок7.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Портрет в традиционной одежде • Карандаш</p></div>
+        <div class="md:col-span-7 art-card md:-mt-12" data-aos="fade-left"><img loading="lazy" decoding="async" src="Рисунок8.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Дама за столиком • Карандаш</p></div>
+        <div class="md:col-span-6 art-card" data-aos="fade-up"><img loading="lazy" decoding="async" src="Рисунок10.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Портрет мальчика • Карандаш</p></div>
+        <div class="md:col-span-6 art-card md:mt-12" data-aos="fade-up" data-aos-delay="200"><img loading="lazy" decoding="async" src="Рисунок4.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Натюрморт с птицей • Карандаш</p></div>
       </div>
     </div>
 
     <!-- Натюрморты -->
-    <div class="mb-20 page-break no-break">
-      <h3 class="text-2xl md:text-3xl mb-8 text-amber-600 border-l-4 border-amber-400 pl-4 font-medium italic">Натюрморты</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок2.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Акварельный натюрморт • Акварель</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок3.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Натюрморт с кофейником • Масло</p></div>
+    <div class="mb-32 page-break no-break">
+      <h3 class="text-xl md:text-2xl mb-12 text-zinc-400 tracking-widest uppercase text-center font-light" data-aos="fade-up">Натюрморты</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+        <div class="art-card" data-aos="zoom-in"><img loading="lazy" decoding="async" src="Рисунок2.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Акварельный натюрморт • Акварель</p></div>
+        <div class="art-card md:mt-20" data-aos="zoom-in" data-aos-delay="200"><img loading="lazy" decoding="async" src="Рисунок3.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Натюрморт с кофейником • Масло</p></div>
       </div>
     </div>
 
     <!-- Творческие -->
-    <div class="mb-20 page-break no-break">
-      <h3 class="text-2xl md:text-3xl mb-8 text-amber-600 border-l-4 border-amber-400 pl-4 font-medium italic">Творческие и фигуративные работы</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок9.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Ангел с птицей • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок13.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Динамичная мужская фигура • Масло</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок16.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Девушка и леопард (1) • Масло</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок17.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Девушка и леопард (2) • Масло</p></div>
+    <div class="mb-32 page-break no-break">
+      <h3 class="text-xl md:text-2xl mb-12 text-zinc-400 tracking-widest uppercase text-center font-light" data-aos="fade-up">Творческие работы</h3>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div class="md:col-span-6 art-card" data-aos="fade-up"><img loading="lazy" decoding="async" src="Рисунок9.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Ангел с птицей • Карандаш</p></div>
+        <div class="md:col-span-6 art-card md:mt-16" data-aos="fade-up" data-aos-delay="200"><img loading="lazy" decoding="async" src="Рисунок13.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Динамичная мужская фигура • Масло</p></div>
+        <div class="md:col-span-6 art-card" data-aos="fade-up"><img loading="lazy" decoding="async" src="Рисунок16.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Девушка и леопард (1) • Масло</p></div>
+        <div class="md:col-span-6 art-card md:-mt-16" data-aos="fade-up" data-aos-delay="200"><img loading="lazy" decoding="async" src="Рисунок17.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Девушка и леопард (2) • Масло</p></div>
       </div>
     </div>
 
     <!-- Прикладное -->
     <div class="page-break no-break">
-      <h3 class="text-2xl md:text-3xl mb-8 text-amber-600 border-l-4 border-amber-400 pl-4 font-medium italic">Прикладное и декоративное искусство</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-12">
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок11.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Декоративный поднос • Роспись</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок12.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Городской пейзаж • Карандаш</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок14.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Мурал в детской комнате • Стеновая роспись</p></div>
-        <div class="art-card"><img loading="lazy" decoding="async" src="Рисунок15.jpg" class="w-full rounded-3xl"><p class="mt-5 font-medium text-zinc-600">Кастом джинсы «Хання» • Роспись ткани</p></div>
+      <h3 class="text-xl md:text-2xl mb-12 text-zinc-400 tracking-widest uppercase text-center font-light" data-aos="fade-up">Прикладное искусство</h3>
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+        <div class="md:col-span-4 art-card" data-aos="fade-up"><img loading="lazy" decoding="async" src="Рисунок11.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Декоративный поднос • Роспись</p></div>
+        <div class="md:col-span-8 art-card md:mt-12" data-aos="fade-up" data-aos-delay="200"><img loading="lazy" decoding="async" src="Рисунок12.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Городской пейзаж • Карандаш</p></div>
+        <div class="md:col-span-7 art-card" data-aos="fade-up"><img loading="lazy" decoding="async" src="Рисунок14.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Мурал в детской комнате</p></div>
+        <div class="md:col-span-5 art-card md:mt-24" data-aos="fade-up" data-aos-delay="200"><img loading="lazy" decoding="async" src="Рисунок15.jpg" class="w-full rounded-2xl"><p class="mt-4 text-sm tracking-wide text-zinc-500 uppercase">Кастом джинсы «Хання»</p></div>
       </div>
     </div>
   </div>
 
   <!-- Футер -->
-  <footer class="bg-zinc-900 text-white py-16 px-6 border-t border-zinc-800">
-    <div class="max-w-4xl mx-auto flex flex-col items-center">
-      <h2 class="text-3xl md:text-4xl font-semibold mb-8 tracking-tight">Связаться со мной</h2>
+  <footer class="bg-zinc-50 py-24 px-6 border-t border-zinc-100 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto flex flex-col items-center relative z-10">
+      <h2 class="text-4xl md:text-5xl font-serif mb-16 tracking-tight text-zinc-900" data-aos="fade-up">Контакты</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mb-12">
-        <a href="tel:+79656540935" class="flex flex-col items-center p-6 bg-zinc-800/50 rounded-2xl hover:bg-zinc-800 transition-colors">
-          <i data-lucide="phone" class="w-8 h-8 mb-4 text-amber-400"></i>
-          <span class="text-zinc-400 text-sm mb-1">Телефон</span>
-          <span class="font-medium">+7 965 654-09-35</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full mb-20">
+        <a href="tel:+79656540935" class="flex flex-col items-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-md transition-all group" data-aos="fade-up" data-aos-delay="100">
+          <i data-lucide="phone" class="w-6 h-6 mb-4 text-zinc-400 group-hover:text-zinc-900 transition-colors"></i>
+          <span class="text-zinc-400 text-[10px] uppercase tracking-widest mb-2">Телефон</span>
+          <span class="font-medium text-sm">+7 965 654-09-35</span>
         </a>
 
-        <a href="mailto:akhmetova.dilara21@yandex.ru" class="flex flex-col items-center p-6 bg-zinc-800/50 rounded-2xl hover:bg-zinc-800 transition-colors">
-          <i data-lucide="mail" class="w-8 h-8 mb-4 text-amber-400"></i>
-          <span class="text-zinc-400 text-sm mb-1">Email</span>
-          <span class="font-medium text-center break-all">akhmetova.dilara21@yandex.ru</span>
+        <a href="mailto:akhmetova.dilara21@yandex.ru" class="flex flex-col items-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-md transition-all group" data-aos="fade-up" data-aos-delay="200">
+          <i data-lucide="mail" class="w-6 h-6 mb-4 text-zinc-400 group-hover:text-zinc-900 transition-colors"></i>
+          <span class="text-zinc-400 text-[10px] uppercase tracking-widest mb-2">Email</span>
+          <span class="font-medium text-sm break-all text-center">akhmetova.dilara21@yandex.ru</span>
         </a>
 
-        <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="flex flex-col items-center p-6 bg-zinc-800/50 rounded-2xl hover:bg-zinc-800 transition-colors border border-amber-400/20">
-          <i data-lucide="instagram" class="w-8 h-8 mb-4 text-amber-400"></i>
-          <span class="text-zinc-400 text-sm mb-1">Instagram</span>
-          <span class="font-medium">@demon_sitri21</span>
+        <a href="https://t.me/Dilara_Ramilevna12" target="_blank" class="flex flex-col items-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-md transition-all group border border-zinc-900/5" data-aos="fade-up" data-aos-delay="300">
+          <i data-lucide="send" class="w-6 h-6 mb-4 text-zinc-400 group-hover:text-zinc-900 transition-colors"></i>
+          <span class="text-zinc-400 text-[10px] uppercase tracking-widest mb-2">Telegram</span>
+          <span class="font-medium text-sm">@Dilara_Ramilevna12</span>
+        </a>
+
+        <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="flex flex-col items-center p-8 bg-white rounded-3xl shadow-sm hover:shadow-md transition-all group" data-aos="fade-up" data-aos-delay="400">
+          <i data-lucide="instagram" class="w-6 h-6 mb-4 text-zinc-400 group-hover:text-zinc-900 transition-colors"></i>
+          <span class="text-zinc-400 text-[10px] uppercase tracking-widest mb-2">Instagram</span>
+          <span class="font-medium text-sm">@demon_sitri21</span>
         </a>
       </div>
 
-      <div class="text-center">
-        <p class="text-zinc-500 text-sm">© 2024 Дилара Ахметова. Все права защищены.</p>
-        <p class="mt-2 text-zinc-600 text-xs">Портфолио художника</p>
+      <div class="text-center opacity-40">
+        <p class="text-zinc-900 text-[10px] tracking-[0.3em] uppercase">© 2024 Дилара Ахметова</p>
       </div>
     </div>
   </footer>
 
   <script>
     lucide.createIcons();
+    AOS.init({
+      once: true,
+      duration: 1000,
+      easing: 'ease-out-cubic',
+    });
+
+    // GSAP Entrance Animations
+    gsap.from("#hero-content", {
+      duration: 2,
+      y: 100,
+      opacity: 0,
+      ease: "power4.out",
+      delay: 0.5
+    });
+
+    gsap.from("#title-main", {
+      duration: 1.5,
+      y: 50,
+      opacity: 0,
+      ease: "power3.out",
+      delay: 0.8
+    });
+
+    gsap.from("#title-sub", {
+      duration: 1.5,
+      y: 30,
+      opacity: 0,
+      ease: "power3.out",
+      delay: 1.1
+    });
+
+    gsap.from("#title-tag", {
+      duration: 1.5,
+      opacity: 0,
+      scaleX: 0,
+      ease: "power2.out",
+      delay: 1.4
+    });
+
+    // Parallax effect
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroImg = document.getElementById('hero-img');
+      if (heroImg) {
+        heroImg.style.transform = `scale(1.1) translateY(${scrolled * 0.15}px)`;
+      }
+    });
   </script>
 </body>
 </html>
