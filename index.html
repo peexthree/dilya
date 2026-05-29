@@ -139,6 +139,7 @@
     body.vibrant-mode .art-card img {
       filter: grayscale(100%);
     }
+    body.vibrant-mode .art-card:hover img,
     .art-card:hover img {
       filter: grayscale(0%);
       scale: 1.05;
@@ -274,10 +275,10 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="relative min-h-screen flex items-center justify-center p-6 md:p-20 overflow-hidden pt-32">
+  <header class="relative min-h-screen flex items-center justify-center p-6 md:p-20 overflow-hidden pt-48">
     <div class="absolute inset-0 z-0">
-      <img src="Рисунок1.jpg" alt="Background" class="w-full h-full object-cover object-top opacity-20">
-      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--zzz-black)] to-[var(--zzz-black)]"></div>
+      <img src="Рисунок1.jpg" alt="Background" class="w-full h-full object-cover object-top opacity-60">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--zzz-black)]/30 to-[var(--zzz-black)]"></div>
       <div id="vibrant-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,255,0,0.1),transparent_70%)] opacity-0 transition-opacity duration-500"></div>
     </div>
 
@@ -319,7 +320,11 @@
         <div class="zzz-label mb-6" data-classic="Биография" data-vibrant="ЛИЧНЫЕ ДАННЫЕ">Биография</div>
         <p class="text-xl text-zinc-400 leading-relaxed font-light">
           Ахметова Дилара Рамилевна — выпускница Художественно-графического факультета
-          БГПУ им. М. Акмуллы. Работает в классических и современных техниках: масло, акварель, акрил, графика.
+          БГПУ им. М. Акмуллы (2022, специальность «Изобразительное искусство и черчение»).<br><br>
+          Работает в классических и современных техниках: масло, акварель, акрил, графика,
+          карандаш, декоративная роспись по дереву и ткани, батик.
+          Специализируется на портретах, фигуративной живописи, натюрмортах и
+          декоративно-прикладном искусстве. Имеет опыт преподавания ИЗО и проведения мастер-классов.
         </p>
       </div>
       <div class="grid grid-cols-1 gap-6" data-aos="fade-left">
@@ -357,10 +362,10 @@
         </div>
         <div class="p-6 flex justify-between items-center">
           <div>
-            <div class="zzz-label text-[10px] mb-1" data-classic="Портрет" data-vibrant="ACADEMY // 01">Портрет</div>
-            <h4 class="font-serif italic text-lg">Вдохновение</h4>
+            <div class="zzz-label text-[10px] mb-1" data-classic="Натюрморт" data-vibrant="STILL LIFE // 01">Натюрморт</div>
+            <h4 class="font-serif italic text-lg">Акварельный натюрморт</h4>
           </div>
-          <div class="text-[10px] uppercase tracking-tighter text-zinc-400">Холст, Масло</div>
+          <div class="text-[10px] uppercase tracking-tighter text-zinc-400">Акварель</div>
         </div>
       </div>
 
@@ -369,8 +374,9 @@
           <img src="Рисунок5.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <div class="zzz-label text-[10px] mb-1">Набросок</div>
+          <div class="zzz-label text-[10px] mb-1">Академия</div>
           <h4 class="font-serif italic">Мужской ню</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
 
@@ -379,19 +385,23 @@
           <img src="Рисунок6.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <div class="zzz-label text-[10px] mb-1">Классика</div>
-          <h4 class="font-serif italic">Венера</h4>
+          <div class="zzz-label text-[10px] mb-1">Академия</div>
+          <h4 class="font-serif italic">Венера Милосская</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
 
-      <!-- Row 2 (partially under row 1) -->
+      <!-- Row 2 -->
       <div class="art-card group md:col-span-2" data-aos="fade-up">
         <div class="relative overflow-hidden aspect-video">
           <img src="Рисунок13.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4 flex justify-between items-center">
-          <h4 class="font-serif italic">Динамика движения</h4>
-          <span class="text-[10px] text-zinc-400">2023</span>
+          <div>
+            <div class="zzz-label text-[10px] mb-1">Творческая</div>
+            <h4 class="font-serif italic">Динамичная мужская фигура</h4>
+          </div>
+          <span class="text-[10px] text-zinc-400">Масло</span>
         </div>
       </div>
 
@@ -401,7 +411,9 @@
           <img src="Рисунок7.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Портрет (Карандаш)</h4>
+          <div class="zzz-label text-[10px] mb-1">Академия</div>
+          <h4 class="font-serif italic">Портрет в традиционной одежде</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
 
@@ -411,7 +423,8 @@
         </div>
         <div class="p-4">
           <div class="zzz-label text-[10px] mb-1">Кастом</div>
-          <h4 class="font-serif italic">Джинсы «Хання»</h4>
+          <h4 class="font-serif italic">Кастом джинсы «Хання»</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Роспись ткани</div>
         </div>
       </div>
 
@@ -420,7 +433,9 @@
           <img src="Рисунок3.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Натюрморт</h4>
+          <div class="zzz-label text-[10px] mb-1">Натюрморт</div>
+          <h4 class="font-serif italic">Натюрморт с кофейником</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Масло</div>
         </div>
       </div>
 
@@ -430,7 +445,9 @@
           <img src="Рисунок4.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Натюрморт II</h4>
+          <div class="zzz-label text-[10px] mb-1">Натюрморт</div>
+          <h4 class="font-serif italic">Натюрморт с птицей</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
       <div class="art-card group" data-aos="fade-up">
@@ -438,7 +455,9 @@
           <img src="Рисунок8.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Этюд головы</h4>
+          <div class="zzz-label text-[10px] mb-1">Академия</div>
+          <h4 class="font-serif italic">Дама за столиком</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
       <div class="art-card group" data-aos="fade-up">
@@ -446,7 +465,9 @@
           <img src="Рисунок9.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Анатомия</h4>
+          <div class="zzz-label text-[10px] mb-1">Творческая</div>
+          <h4 class="font-serif italic">Ангел с птицей</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
       <div class="art-card group" data-aos="fade-up">
@@ -454,7 +475,9 @@
           <img src="Рисунок10.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Торс</h4>
+          <div class="zzz-label text-[10px] mb-1">Академия</div>
+          <h4 class="font-serif italic">Портрет мальчика</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
 
@@ -464,7 +487,9 @@
           <img src="Рисунок11.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Портрет в интерьере</h4>
+          <div class="zzz-label text-[10px] mb-1">Декор</div>
+          <h4 class="font-serif italic">Декоративный поднос</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Роспись</div>
         </div>
       </div>
       <div class="art-card group md:col-span-2" data-aos="fade-up">
@@ -472,7 +497,9 @@
           <img src="Рисунок12.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Женский образ</h4>
+          <div class="zzz-label text-[10px] mb-1">Творческая</div>
+          <h4 class="font-serif italic">Городской пейзаж</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Карандаш</div>
         </div>
       </div>
 
@@ -482,7 +509,9 @@
           <img src="Рисунок14.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Композиция</h4>
+          <div class="zzz-label text-[10px] mb-1">Монументальная</div>
+          <h4 class="font-serif italic">Мурал в детской комнате</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Стеновая роспись</div>
         </div>
       </div>
       <div class="art-card group" data-aos="fade-up">
@@ -490,7 +519,9 @@
           <img src="Рисунок16.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Роспись</h4>
+          <div class="zzz-label text-[10px] mb-1">Фигуратив</div>
+          <h4 class="font-serif italic">Девушка и леопард (1)</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Масло</div>
         </div>
       </div>
       <div class="art-card group md:col-span-2" data-aos="fade-up">
@@ -498,7 +529,9 @@
           <img src="Рисунок17.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4">
-          <h4 class="font-serif italic">Декоративное панно</h4>
+          <div class="zzz-label text-[10px] mb-1">Фигуратив</div>
+          <h4 class="font-serif italic">Девушка и леопард (2)</h4>
+          <div class="text-[10px] text-zinc-400 mt-1">Масло</div>
         </div>
       </div>
     </div>
@@ -534,10 +567,6 @@
 
       <div class="mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="text-[10px] font-mono text-zinc-600">© 2024 ДИЛАРА АХМЕТОВА // ВСЕ ПРАВА ЗАЩИЩЕНЫ</div>
-        <div class="flex gap-4 text-[10px] font-mono text-zinc-600 uppercase">
-          <span>Дизайн: AI</span>
-          <span>Система v1.0.4</span>
-        </div>
       </div>
     </div>
   </footer>
