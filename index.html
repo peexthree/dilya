@@ -10,18 +10,24 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Lucide Icons for Classic Style -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400&display=swap');
+    .classic-icon { display: inline-block; }
+    .vibrant-icon { display: inline-block; }
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600&display=swap');
     
     :root {
-      --zzz-neon: #FFFFFF; /* Strict default: White */
-      --zzz-black: #050505;
-      --zzz-black-rgb: 5, 5, 5;
-      --zzz-white: #FFFFFF;
-      --zzz-gray: #0F0F0F;
-      --zzz-text: #F0F0F0;
-      --zzz-accent-rgb: 255, 255, 255;
+      --zzz-neon: #5d7a8c; /* Soft Blue-Grey */
+      --zzz-black: #f0f4f7; /* Light Background */
+      --zzz-black-rgb: 240, 244, 247;
+      --zzz-white: #1a1a1a; /* Text color in light mode */
+      --zzz-gray: #ffffff; /* Card background in light mode */
+      --zzz-text: #2c3e50;
+      --zzz-accent-rgb: 93, 122, 140;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
     }
 
     body.vibrant-mode {
@@ -32,19 +38,21 @@
       --zzz-gray: #1A1A1A;
       --zzz-text: #E0E0E0;
       --zzz-accent-rgb: 212, 255, 0;
+      --font-heading: 'Syne', sans-serif;
+      --font-body: 'Space Grotesk', sans-serif;
     }
 
     body { 
       background-color: var(--zzz-black);
       color: var(--zzz-text);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: var(--font-body);
       overflow-x: hidden;
       transition: background-color 0.5s ease, color 0.5s ease;
     }
 
     h1, h2, h3 { 
-      font-family: 'Syne', sans-serif;
-      text-transform: uppercase;
+      font-family: var(--font-heading);
+      text-transform: none; /* Vogue style is often not all caps, or selectively caps */
     }
 
     .zzz-border {
@@ -57,14 +65,21 @@
     }
 
     .btn-zzz {
-      background: var(--zzz-neon);
-      color: var(--zzz-black);
-      font-weight: 800;
+      background: transparent;
+      border: 1px solid var(--zzz-white);
+      color: var(--zzz-white);
+      font-family: var(--font-body);
+      font-weight: 400;
       text-transform: uppercase;
+      letter-spacing: 0.1em;
       padding: 0.75rem 1.5rem;
       transition: all 0.3s ease;
     }
     body.vibrant-mode .btn-zzz {
+      background: var(--zzz-neon);
+      color: var(--zzz-black);
+      border: none;
+      font-weight: 800;
       clip-path: polygon(0 0, 100% 0, 100% 70%, 90% 100%, 0 100%);
     }
     .btn-zzz:hover {
@@ -118,11 +133,11 @@
       transform: translateY(-5px);
     }
     .art-card img {
-      filter: grayscale(100%);
+      filter: none;
       transition: all 0.6s ease;
     }
     body.vibrant-mode .art-card img {
-      filter: grayscale(80%);
+      filter: grayscale(100%);
     }
     .art-card:hover img {
       filter: grayscale(0%);
@@ -130,15 +145,22 @@
     }
 
     .zzz-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      background: var(--zzz-neon);
-      color: var(--zzz-black);
-      padding: 2px 6px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--zzz-neon);
+      color: var(--zzz-neon);
+      padding: 2px 0;
       display: inline-block;
       transition: all 0.5s ease;
     }
     body.vibrant-mode .zzz-label {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--zzz-neon);
+      color: var(--zzz-black);
+      padding: 2px 6px;
+      border-bottom: none;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
 
@@ -227,51 +249,59 @@
   <!-- Navigation -->
   <nav class="fixed top-0 left-0 w-full z-50 px-6 py-4 flex justify-between items-center zzz-bg-glass border-b border-white/5">
     <div class="flex items-center gap-4">
-      <img src="01_proxy_tv_monitor.svg" class="w-10 h-10 transition-transform duration-300 hover:scale-110" alt="Home">
-      <span id="brand-toggle" class="font-bold tracking-tighter text-xl uppercase hidden md:block cursor-pointer hover:opacity-70 transition-opacity">АХМЕТОВА // ПОРТФОЛИО</span>
+      <div id="nav-logo-container" class="cursor-pointer">
+        <i data-lucide="palmtree" class="w-8 h-8 classic-icon"></i>
+        <img src="01_proxy_tv_monitor.svg" class="w-10 h-10 vibrant-icon hidden" alt="Home">
+      </div>
+      <span id="brand-toggle" class="font-serif italic text-2xl cursor-pointer hover:opacity-70 transition-opacity" data-classic="Ахметова" data-vibrant="АХМЕТОВА // ПОРТФОЛИО">Ахметова</span>
     </div>
 
-    <div class="flex gap-4">
-      <a href="https://t.me/Dilara_Ramilevna12" target="_blank" class="w-10 h-10 flex items-center justify-center border border-white/10 hover:border-[var(--zzz-neon)] transition-colors">
-        <img src="05_cyber_flip_phone.svg" class="w-8 h-8 transition-transform duration-300 hover:scale-110">
+    <div class="flex gap-4 items-center">
+      <a href="https://t.me/Dilara_Ramilevna12" target="_blank" class="p-2 hover:text-[var(--zzz-neon)] transition-colors">
+        <i data-lucide="send" class="w-6 h-6 classic-icon"></i>
+        <img src="05_cyber_flip_phone.svg" class="w-8 h-8 vibrant-icon hidden">
       </a>
-      <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="w-10 h-10 flex items-center justify-center border border-white/10 hover:border-[var(--zzz-neon)] transition-colors">
-        <img src="06_retro_cassette_tape.svg" class="w-8 h-8 transition-transform duration-300 hover:scale-110">
+      <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="p-2 hover:text-[var(--zzz-neon)] transition-colors">
+        <i data-lucide="instagram" class="w-6 h-6 classic-icon"></i>
+        <img src="06_retro_cassette_tape.svg" class="w-8 h-8 vibrant-icon hidden">
       </a>
-      <button onclick="window.print()" class="btn-zzz flex items-center gap-2">
-        <img src="04_diamond_palette.svg" class="w-5 h-5">
-        <span class="text-xs">Скачать Резюме</span>
+      <button onclick="window.print()" class="btn-zzz">
+        <i data-lucide="download" class="w-4 h-4 classic-icon"></i>
+        <img src="04_diamond_palette.svg" class="w-5 h-5 vibrant-icon hidden">
+        <span class="text-xs uppercase tracking-widest">Скачать Резюме</span>
       </button>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <header class="relative min-h-screen flex items-end justify-start p-6 md:p-20 overflow-hidden pt-48 md:pt-64 mt-16 md:mt-20">
+  <header class="relative min-h-screen flex items-center justify-center p-6 md:p-20 overflow-hidden pt-32">
     <div class="absolute inset-0 z-0">
-      <img src="Рисунок1.jpg" alt="Background" class="w-full h-full object-cover object-top opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-t from-[var(--zzz-black)] via-transparent to-transparent"></div>
+      <img src="Рисунок1.jpg" alt="Background" class="w-full h-full object-cover object-top opacity-20">
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--zzz-black)] to-[var(--zzz-black)]"></div>
       <div id="vibrant-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,255,0,0.1),transparent_70%)] opacity-0 transition-opacity duration-500"></div>
     </div>
 
-    <div class="relative z-10 max-w-4xl" id="hero-content">
-      <div class="zzz-label mb-4">ПРОФИЛЬ ХУДОЖНИКА // ПОДТВЕРЖДЕН</div>
-      <div class="mb-2">
-        <h1 class="text-7xl md:text-9xl font-black leading-none tracking-tighter glitch" data-text="АХМЕТОВА">АХМЕТОВА</h1>
-        <h1 class="text-7xl md:text-9xl font-black leading-none tracking-tighter glitch text-[var(--zzz-neon)]" data-text="ДИЛАРА">ДИЛАРА</h1>
+    <div class="relative z-10 text-center max-w-5xl" id="hero-content">
+      <div class="zzz-label mb-8" data-classic="Портфолио Дилары Ахметовой" data-vibrant="ПРОФИЛЬ ХУДОЖНИКА // ПОДТВЕРЖДЕН">Портфолио Дилары Ахметовой</div>
+      <div class="mb-8">
+        <h1 class="text-6xl md:text-9xl font-serif italic leading-tight glitch" id="hero-title-1" data-text="Ахметова" data-classic="Ахметова" data-vibrant="АХМЕТОВА">Ахметова</h1>
+        <h1 class="text-6xl md:text-9xl font-serif leading-tight glitch text-[var(--zzz-neon)]" id="hero-title-2" data-text="Дилара" data-classic="Дилара" data-vibrant="ДИЛАРА">Дилара</h1>
       </div>
-      <p class="font-mono text-sm md:text-lg text-zinc-500 uppercase tracking-widest max-w-xl">
-        Академический рисунок, живопись и декоративно-прикладное искусство. Специализация на фигуративных композициях и кастомном дизайне.
+      <p class="text-lg md:text-2xl text-zinc-500 max-w-2xl mx-auto font-light leading-relaxed" id="hero-desc"
+         data-classic="Академический рисунок, живопись и декоративно-прикладное искусство. Эстетика формы и цвета в каждом штрихе."
+         data-vibrant="Академический рисунок, живопись и декоративно-прикладное искусство. Специализация на фигуративных композициях и кастомном дизайне.">
+        Академический рисунок, живопись и декоративно-прикладное искусство. Эстетика формы и цвета в каждом штрихе.
       </p>
 
-      <div class="mt-12 flex gap-8 items-center">
+      <div class="mt-16 flex flex-wrap justify-center gap-12 items-center">
         <div class="flex flex-col">
-          <span class="text-[10px] font-mono text-zinc-500 uppercase">Статус</span>
-          <span class="text-sm font-bold text-[var(--zzz-neon)]">АКТИВЕН // ЗАКАЗЫ ПРИНИМАЮТСЯ</span>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-zinc-400 mb-1">Статус</span>
+          <span class="text-sm font-medium" id="status-text" data-classic="Свободна для проектов" data-vibrant="АКТИВЕН // ЗАКАЗЫ ПРИНИМАЮТСЯ">Свободна для проектов</span>
         </div>
-        <div class="w-px h-10 bg-white/10"></div>
+        <div class="hidden md:block w-px h-8 bg-zinc-300"></div>
         <div class="flex flex-col">
-          <span class="text-[10px] font-mono text-zinc-500 uppercase">Локация</span>
-          <span class="text-sm font-bold">УФА, РФ</span>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-zinc-400 mb-1">Локация</span>
+          <span class="text-sm font-medium">УФА, РФ</span>
         </div>
       </div>
     </div>
@@ -279,26 +309,27 @@
 
   <!-- About -->
   <section class="py-32 px-6 md:px-20 border-t border-white/5">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
       <div data-aos="fade-right">
         <div class="flex items-center gap-4 mb-8">
-          <img src="02_brush_and_stylus.svg" class="w-16 h-16">
-          <h2 class="text-4xl md:text-6xl font-black">О себе</h2>
+          <i data-lucide="user" class="w-12 h-12 classic-icon text-zinc-300"></i>
+          <img src="02_brush_and_stylus.svg" class="w-16 h-16 vibrant-icon hidden">
+          <h2 class="text-4xl md:text-6xl font-serif italic" data-classic="О художнике" data-vibrant="О СЕБЕ">О художнике</h2>
         </div>
-        <div class="zzz-label mb-6">ЛИЧНЫЕ ДАННЫЕ</div>
-        <p class="text-xl text-zinc-400 leading-relaxed">
+        <div class="zzz-label mb-6" data-classic="Биография" data-vibrant="ЛИЧНЫЕ ДАННЫЕ">Биография</div>
+        <p class="text-xl text-zinc-400 leading-relaxed font-light">
           Ахметова Дилара Рамилевна — выпускница Художественно-графического факультета
           БГПУ им. М. Акмуллы. Работает в классических и современных техниках: масло, акварель, акрил, графика.
         </p>
       </div>
-      <div class="space-y-6" data-aos="fade-left">
-        <div class="p-6 bg-[var(--zzz-gray)] border-l-4 border-[var(--zzz-neon)]">
-          <h3 class="text-sm font-bold mb-2">Специализация</h3>
-          <p class="text-zinc-500 text-sm">Портрет, фигуратив, батик, роспись по дереву, настенная роспись.</p>
+      <div class="grid grid-cols-1 gap-6" data-aos="fade-left">
+        <div class="p-8 bg-[var(--zzz-gray)] border border-zinc-100 shadow-sm transition-all hover:shadow-md">
+          <h3 class="text-xs uppercase tracking-widest text-zinc-400 mb-4">Специализация</h3>
+          <p class="text-lg font-serif italic text-zinc-600">Портрет, фигуратив, батик, роспись по дереву, настенная роспись.</p>
         </div>
-        <div class="p-6 bg-[var(--zzz-gray)] border-l-4 border-white/20">
-          <h3 class="text-sm font-bold mb-2">Образование</h3>
-          <p class="text-zinc-500 text-sm">БГПУ им. Акмуллы, Изобразительное искусство и черчение (2022).</p>
+        <div class="p-8 bg-[var(--zzz-gray)] border border-zinc-100 shadow-sm transition-all hover:shadow-md">
+          <h3 class="text-xs uppercase tracking-widest text-zinc-400 mb-4">Образование</h3>
+          <p class="text-lg font-serif italic text-zinc-600">БГПУ им. Акмуллы, Изобразительное искусство и черчение (2022).</p>
         </div>
       </div>
     </div>
@@ -308,98 +339,166 @@
   <main class="px-6 md:px-20 pb-32">
     <div class="flex justify-between items-end mb-16">
       <div class="flex items-center gap-6">
-        <img src="03_graffiti_spray_can.svg" class="w-20 h-20">
-        <h2 class="text-5xl md:text-8xl font-black tracking-tighter">РАБОТЫ</h2>
+        <i data-lucide="gallery-horizontal" class="w-16 h-16 classic-icon text-zinc-300"></i>
+        <img src="03_graffiti_spray_can.svg" class="w-20 h-20 vibrant-icon hidden">
+        <h2 class="text-5xl md:text-8xl font-serif italic" data-classic="Галерея" data-vibrant="РАБОТЫ">Галерея</h2>
       </div>
       <div class="text-right hidden md:block">
-        <div class="zzz-label">КАТАЛОГ 2024</div>
-        <div class="text-[10px] font-mono text-zinc-500 mt-2">ПРОКРУТИТЕ ДЛЯ ПРОСМОТРА</div>
+        <div class="zzz-label" data-classic="Избранные произведения" data-vibrant="КАТАЛОГ 2024">Избранные произведения</div>
+        <div class="text-[10px] uppercase tracking-widest text-zinc-400 mt-2">scroll to explore</div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Item 1 -->
-      <div class="art-card group" data-aos="fade-up">
-        <div class="relative overflow-hidden aspect-[3/4]">
-          <img src="Рисунок5.jpg" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-[var(--zzz-neon)]/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Row 1 -->
+      <div class="art-card group md:col-span-2 md:row-span-2" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-[4/5]">
+          <img src="Рисунок2.jpg" class="w-full h-full object-cover">
         </div>
-        <div class="p-4 flex justify-between items-center">
+        <div class="p-6 flex justify-between items-center">
           <div>
-            <div class="text-[10px] font-mono text-[var(--zzz-neon)]">АКАДЕМИЯ // 01</div>
-            <h4 class="font-bold text-sm">Мужской ню</h4>
+            <div class="zzz-label text-[10px] mb-1" data-classic="Портрет" data-vibrant="ACADEMY // 01">Портрет</div>
+            <h4 class="font-serif italic text-lg">Вдохновение</h4>
           </div>
-          <div class="text-[10px] font-mono text-zinc-600">КАРАНДАШ</div>
+          <div class="text-[10px] uppercase tracking-tighter text-zinc-400">Холст, Масло</div>
         </div>
       </div>
 
-      <!-- Item 2 -->
-      <div class="art-card group md:translate-y-12" data-aos="fade-up" data-aos-delay="100">
-        <div class="relative overflow-hidden aspect-[3/4]">
+      <div class="art-card group" data-aos="fade-up" data-aos-delay="100">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок5.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <div class="zzz-label text-[10px] mb-1">Набросок</div>
+          <h4 class="font-serif italic">Мужской ню</h4>
+        </div>
+      </div>
+
+      <div class="art-card group" data-aos="fade-up" data-aos-delay="200">
+        <div class="relative overflow-hidden aspect-square">
           <img src="Рисунок6.jpg" class="w-full h-full object-cover">
         </div>
-        <div class="p-4 flex justify-between items-center">
-          <div>
-            <div class="text-[10px] font-mono text-[var(--zzz-neon)]">АКАДЕМИЯ // 02</div>
-            <h4 class="font-bold text-sm">Венера Милосская</h4>
-          </div>
-          <div class="text-[10px] font-mono text-zinc-600">КАРАНДАШ</div>
+        <div class="p-4">
+          <div class="zzz-label text-[10px] mb-1">Классика</div>
+          <h4 class="font-serif italic">Венера</h4>
         </div>
       </div>
 
-      <!-- Item 3 -->
-      <div class="art-card group" data-aos="fade-up" data-aos-delay="200">
-        <div class="relative overflow-hidden aspect-[3/4]">
-          <img src="Рисунок7.jpg" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 flex justify-between items-center">
-          <div>
-            <div class="text-[10px] font-mono text-[var(--zzz-neon)]">АКАДЕМИЯ // 03</div>
-            <h4 class="font-bold text-sm">Портрет (Традиция)</h4>
-          </div>
-          <div class="text-[10px] font-mono text-zinc-600">КАРАНДАШ</div>
-        </div>
-      </div>
-
-      <!-- Item 4 -->
-      <div class="art-card group" data-aos="fade-up">
-        <div class="relative overflow-hidden aspect-[4/5]">
-          <img src="Рисунок3.jpg" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 flex justify-between items-center">
-          <div>
-            <div class="text-[10px] font-mono text-[var(--zzz-neon)]">ЖИВОПИСЬ // 04</div>
-            <h4 class="font-bold text-sm">Натюрморт с кофейником</h4>
-          </div>
-          <div class="text-[10px] font-mono text-zinc-600">МАСЛО</div>
-        </div>
-      </div>
-
-      <!-- Item 5 -->
-      <div class="art-card group" data-aos="fade-up">
-        <div class="relative overflow-hidden aspect-square">
-          <img src="Рисунок15.jpg" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 flex justify-between items-center">
-          <div>
-            <div class="text-[10px] font-mono text-[var(--zzz-neon)]">КАСТОМ // 05</div>
-            <h4 class="font-bold text-sm">Джинсы «Хання»</h4>
-          </div>
-          <div class="text-[10px] font-mono text-zinc-600">АКРИЛ</div>
-        </div>
-      </div>
-
-       <!-- Item 6 -->
-       <div class="art-card group" data-aos="fade-up">
-        <div class="relative overflow-hidden aspect-[3/4]">
+      <!-- Row 2 (partially under row 1) -->
+      <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video">
           <img src="Рисунок13.jpg" class="w-full h-full object-cover">
         </div>
         <div class="p-4 flex justify-between items-center">
-          <div>
-            <div class="text-[10px] font-mono text-[var(--zzz-neon)]">КРЕАТИВ // 06</div>
-            <h4 class="font-bold text-sm">Динамика</h4>
-          </div>
-          <div class="text-[10px] font-mono text-zinc-600">МАСЛО</div>
+          <h4 class="font-serif italic">Динамика движения</h4>
+          <span class="text-[10px] text-zinc-400">2023</span>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-[3/4]">
+          <img src="Рисунок7.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Портрет (Карандаш)</h4>
+        </div>
+      </div>
+
+      <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video">
+          <img src="Рисунок15.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <div class="zzz-label text-[10px] mb-1">Кастом</div>
+          <h4 class="font-serif italic">Джинсы «Хання»</h4>
+        </div>
+      </div>
+
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-[3/4]">
+          <img src="Рисунок3.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Натюрморт</h4>
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок4.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Натюрморт II</h4>
+        </div>
+      </div>
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок8.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Этюд головы</h4>
+        </div>
+      </div>
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок9.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Анатомия</h4>
+        </div>
+      </div>
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок10.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Торс</h4>
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video">
+          <img src="Рисунок11.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Портрет в интерьере</h4>
+        </div>
+      </div>
+      <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video">
+          <img src="Рисунок12.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Женский образ</h4>
+        </div>
+      </div>
+
+      <!-- Row 6 -->
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок14.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Композиция</h4>
+        </div>
+      </div>
+      <div class="art-card group" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-square">
+          <img src="Рисунок16.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Роспись</h4>
+        </div>
+      </div>
+      <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="relative overflow-hidden aspect-video">
+          <img src="Рисунок17.jpg" class="w-full h-full object-cover">
+        </div>
+        <div class="p-4">
+          <h4 class="font-serif italic">Декоративное панно</h4>
         </div>
       </div>
     </div>
@@ -409,26 +508,27 @@
   <footer class="py-32 px-6 md:px-20 border-t border-white/10 bg-[var(--zzz-black)]">
     <div class="max-w-6xl mx-auto">
       <div class="flex items-center gap-8 mb-20">
-        <img src="05_cyber_flip_phone.svg" class="w-24 h-24">
-        <h2 class="text-5xl md:text-8xl font-black tracking-tighter">КОНТАКТЫ</h2>
+        <i data-lucide="contact" class="w-16 h-16 classic-icon text-zinc-300"></i>
+        <img src="05_cyber_flip_phone.svg" class="w-24 h-24 vibrant-icon hidden">
+        <h2 class="text-5xl md:text-8xl font-serif italic" data-classic="Контакты" data-vibrant="КОНТАКТЫ">Контакты</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <a href="https://t.me/Dilara_Ramilevna12" target="_blank" class="p-8 bg-[var(--zzz-gray)] hover:bg-[var(--zzz-neon)] hover:text-black transition-all group border border-white/5">
-          <div class="text-[10px] font-mono mb-4 text-zinc-500 group-hover:text-black">ТЕЛЕГРАМ</div>
-          <div class="text-lg font-bold">@Dilara_Ramilevna12</div>
+        <a href="https://t.me/Dilara_Ramilevna12" target="_blank" class="p-8 bg-[var(--zzz-gray)] hover:bg-[var(--zzz-neon)] hover:text-black transition-all group border border-zinc-100">
+          <div class="text-[10px] mb-4 text-zinc-400 uppercase tracking-widest group-hover:text-black">Телеграм</div>
+          <div class="text-lg font-medium">@Dilara_Ramilevna12</div>
         </a>
-        <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="p-8 bg-[var(--zzz-gray)] hover:bg-[var(--zzz-neon)] hover:text-black transition-all group border border-white/5">
-          <div class="text-[10px] font-mono mb-4 text-zinc-500 group-hover:text-black">ИНСТАГРАМ</div>
-          <div class="text-lg font-bold">@demon_sitri21</div>
+        <a href="https://www.instagram.com/demon_sitri21" target="_blank" class="p-8 bg-[var(--zzz-gray)] hover:bg-[var(--zzz-neon)] hover:text-black transition-all group border border-zinc-100">
+          <div class="text-[10px] mb-4 text-zinc-400 uppercase tracking-widest group-hover:text-black">Инстаграм</div>
+          <div class="text-lg font-medium">@demon_sitri21</div>
         </a>
-        <a href="mailto:akhmetova.dilara21@yandex.ru" class="p-8 bg-[var(--zzz-gray)] hover:bg-[var(--zzz-neon)] hover:text-black transition-all group border border-white/5">
-          <div class="text-[10px] font-mono mb-4 text-zinc-500 group-hover:text-black">ПОЧТА</div>
-          <div class="text-lg font-bold truncate">akhmetova.dilara21@yandex.ru</div>
+        <a href="mailto:akhmetova.dilara21@yandex.ru" class="p-8 bg-[var(--zzz-gray)] hover:bg-[var(--zzz-neon)] hover:text-black transition-all group border border-zinc-100">
+          <div class="text-[10px] mb-4 text-zinc-400 uppercase tracking-widest group-hover:text-black">Почта</div>
+          <div class="text-lg font-medium truncate">akhmetova.dilara21@yandex.ru</div>
         </a>
-        <div class="p-8 bg-[var(--zzz-gray)] border border-white/5">
-          <div class="text-[10px] font-mono mb-4 text-zinc-500">ДОСТУПНОСТЬ</div>
-          <div class="text-lg font-bold">ГОТОВА К РАБОТЕ</div>
+        <div class="p-8 bg-[var(--zzz-gray)] border border-zinc-100">
+          <div class="text-[10px] mb-4 text-zinc-400 uppercase tracking-widest">Доступность</div>
+          <div class="text-lg font-medium" data-classic="Свободна для заказов" data-vibrant="ГОТОВА К РАБОТЕ">Свободна для заказов</div>
         </div>
       </div>
 
@@ -456,6 +556,32 @@
     const vibrantGlow = document.getElementById('vibrant-glow');
     let isVibrant = false;
 
+    const updateModeContent = () => {
+      const mode = isVibrant ? 'vibrant' : 'classic';
+
+      // Update text content based on data attributes
+      document.querySelectorAll('[data-classic]').forEach(el => {
+        const newText = el.getAttribute(`data-${mode}`);
+        if (newText) {
+          el.textContent = newText;
+          if (el.classList.contains('glitch')) {
+            el.setAttribute('data-text', newText);
+          }
+        }
+      });
+
+      // Toggle icons
+      document.querySelectorAll('.classic-icon').forEach(el => {
+        el.classList.toggle('hidden', isVibrant);
+      });
+      document.querySelectorAll('.vibrant-icon').forEach(el => {
+        el.classList.toggle('hidden', !isVibrant);
+      });
+
+      // Update Lucide icons if they were hidden/shown
+      lucide.createIcons();
+    };
+
     brandToggle.addEventListener('click', () => {
       // Trigger glitch transition
       overlay.classList.add('glitch-flash');
@@ -470,6 +596,8 @@
         isVibrant = !isVibrant;
         document.body.classList.toggle('vibrant-mode', isVibrant);
         vibrantGlow.style.opacity = isVibrant ? "1" : "0";
+
+        updateModeContent();
 
         gsap.to(overlay, {
           opacity: 0,
@@ -486,37 +614,46 @@
           opacity: 0,
           stagger: 0.1,
           duration: 0.5,
-          ease: "back.out(1.7)"
+          ease: isVibrant ? "back.out(1.7)" : "power2.out"
         });
       }, 250);
     });
 
+    // Initial icon render
+    lucide.createIcons();
+
     // GSAP Entrance
     gsap.from("#hero-content", {
-      duration: 1.2,
-      y: 50,
+      duration: 1.5,
+      y: 30,
       opacity: 0,
-      ease: "power4.out",
-      delay: 0.2
+      ease: "power3.out",
+      delay: 0.4
     });
 
-    // Terminal Text Effect for BIO
+    // Terminal Text Effect for BIO - only in vibrant mode
     const bioText = document.querySelector('.text-xl.text-zinc-400');
     if (bioText) {
       const originalText = bioText.innerHTML;
-      bioText.innerHTML = "";
-      let i = 0;
-      function typeWriter() {
-        if (i < originalText.length) {
-          bioText.innerHTML += originalText.charAt(i);
-          i++;
-          setTimeout(typeWriter, 10);
+
+      const runTypewriter = () => {
+        if (!isVibrant) return;
+        bioText.innerHTML = "";
+        let i = 0;
+        function typeWriter() {
+          if (i < originalText.length && isVibrant) {
+            bioText.innerHTML += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 10);
+          }
         }
-      }
+        typeWriter();
+      };
+
       // Trigger when visible
       const observer = new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting) {
-          typeWriter();
+        if(entries[0].isIntersecting && isVibrant) {
+          runTypewriter();
           observer.disconnect();
         }
       }, { threshold: 0.5 });
