@@ -45,20 +45,22 @@
                     .animate-wave-2 { transform-origin: bottom; animation: zzzWave 0.8s infinite ease-in-out alternate; }
                     .animate-wave-3 { transform-origin: bottom; animation: zzzWave 0.5s infinite ease-in-out alternate; }
                 </style>
-            
+
                             <!-- Main cassette shell -->
                             <rect x="15" y="25" width="70" height="48" rx="6" fill="#141419" stroke="#E8FF00" stroke-width="4.5"></rect>
                             <!-- Bottom tape protector block -->
                             <path d="M26 73 L32 64 H68 L74 73 Z" fill="#27272a" stroke="#E8FF00" stroke-width="3.5" stroke-linejoin="round"></path>
+
                             
                             <!-- Middle sticker/label -->
                             <rect x="23" y="33" width="54" height="22" rx="3" fill="#FF0055"></rect>
                             
+
                             <!-- Left spinning gear -->
                             <circle cx="38" cy="44" r="8" fill="#121214" stroke="#E8FF00" stroke-width="3"></circle>
                             <!-- Gear teeth inside -->
                             <path d="M38 38 V50 M32 44 H44" stroke="#E8FF00" stroke-width="2.5" class="animate-zzz-spin"></path>
-                            
+
                             <!-- Right spinning gear -->
                             <circle cx="62" cy="44" r="8" fill="#121214" stroke="#E8FF00" stroke-width="3"></circle>
                             <path d="M62 38 V50 M56 44 H68" stroke="#E8FF00" stroke-width="2.5" class="animate-zzz-spin"></path>
