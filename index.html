@@ -365,7 +365,7 @@
   <!-- Hero Section -->
   <header class="relative min-h-screen flex items-center justify-center p-6 md:p-20 overflow-hidden pt-48">
     <div class="absolute inset-0 z-0">
-      <img src="Рисунок1.jpg" alt="Background" class="w-full h-full object-cover object-top opacity-60">
+      <img src="Рисунок1.jpg" alt="Background" class="w-full h-full object-cover object-top opacity-60" data-classic="Рисунок1.jpg" data-vibrant="266047213.jpg">
       <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--zzz-black)]/30 to-[var(--zzz-black)]"></div>
       <div id="vibrant-glow" class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,255,0,0.1),transparent_70%)] opacity-0 transition-opacity duration-500"></div>
     </div>
@@ -730,11 +730,15 @@
         const mode = isVibrant ? 'vibrant' : 'classic';
 
         document.querySelectorAll('[data-classic]').forEach(el => {
-          const newText = el.getAttribute(`data-${mode}`);
-          if (newText) {
-            el.textContent = newText;
-            if (el.classList.contains('glitch')) {
-              el.setAttribute('data-text', newText);
+          const newVal = el.getAttribute(`data-${mode}`);
+          if (newVal) {
+            if (el.tagName === 'IMG') {
+              el.src = newVal;
+            } else {
+              el.textContent = newVal;
+              if (el.classList.contains('glitch')) {
+                el.setAttribute('data-text', newVal);
+              }
             }
           }
         });
