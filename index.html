@@ -723,6 +723,7 @@
       const brandToggle = document.getElementById('brand-toggle');
       const overlay = document.getElementById('mode-transition-overlay');
       const vibrantGlow = document.getElementById('vibrant-glow');
+      const glitchSound = new Audio('b1432bcef1b0835.mp3');
       let isVibrant = false;
 
       const updateModeContent = () => {
@@ -745,6 +746,10 @@
       };
 
       brandToggle.addEventListener('click', () => {
+        // Play glitch sound
+        glitchSound.currentTime = 0;
+        glitchSound.play().catch(e => console.log("Audio playback failed:", e));
+
         if (!hasGSAP) {
           // Fallback toggle without animations
           isVibrant = !isVibrant;
