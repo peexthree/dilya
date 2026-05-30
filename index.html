@@ -19,13 +19,13 @@
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600&display=swap');
     
     :root {
-      --zzz-neon: #5d7a8c; /* Soft Blue-Grey */
-      --zzz-black: #f0f4f7; /* Light Background */
-      --zzz-black-rgb: 240, 244, 247;
-      --zzz-white: #1a1a1a; /* Text color in light mode */
-      --zzz-gray: #ffffff; /* Card background in light mode */
-      --zzz-text: #2c3e50;
-      --zzz-accent-rgb: 93, 122, 140;
+      --zzz-neon: #2d3436; /* Darker charcoal for accents */
+      --zzz-black: #fdfdfc; /* Creamier, editorial off-white */
+      --zzz-black-rgb: 253, 253, 252;
+      --zzz-white: #000000; /* Pure black text */
+      --zzz-gray: #ffffff;
+      --zzz-text: #1a1a1a;
+      --zzz-accent-rgb: 45, 52, 54;
       --font-heading: 'Playfair Display', serif;
       --font-body: 'Inter', sans-serif;
     }
@@ -48,6 +48,30 @@
       font-family: var(--font-body);
       overflow-x: hidden;
       transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* Hide default cursor on desktop when custom cursor is active */
+    @media (min-width: 769px) {
+      body.has-custom-cursor,
+      body.has-custom-cursor a,
+      body.has-custom-cursor button,
+      body.has-custom-cursor #brand-toggle,
+      body.has-custom-cursor .art-card,
+      body.has-custom-cursor [role="button"] {
+        cursor: none !important;
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--zzz-black);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--zzz-neon);
+      border-radius: 3px;
     }
 
     h1, h2, h3 { 
@@ -109,7 +133,7 @@
 
     .art-card {
       background: var(--zzz-gray);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(var(--zzz-accent-rgb), 0.05);
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       position: relative;
       overflow: hidden;
@@ -128,13 +152,30 @@
     .art-card::after { bottom: 0; right: 0; border-left: 0; border-top: 0; }
     .art-card:hover::before, .art-card:hover::after { opacity: 1; }
 
+    /* Tech ornaments for Vibrant mode */
+    .tech-bracket {
+      display: none;
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border: 1px solid var(--zzz-neon);
+      z-index: 25;
+      opacity: 0.6;
+    }
+    body.vibrant-mode .tech-bracket { display: block; }
+    .tech-bracket.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+    .tech-bracket.tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+    .tech-bracket.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+    .tech-bracket.br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
     .art-card:hover {
       border-color: var(--zzz-neon);
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     }
     .art-card img {
       filter: none;
-      transition: all 0.6s ease;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     body.vibrant-mode .art-card img {
       filter: grayscale(100%);
@@ -142,7 +183,51 @@
     body.vibrant-mode .art-card:hover img,
     .art-card:hover img {
       filter: grayscale(0%);
-      scale: 1.05;
+      scale: 1.1;
+    }
+
+    body.vibrant-mode .art-card:hover {
+      box-shadow: 0 0 20px rgba(var(--zzz-accent-rgb), 0.2);
+    }
+
+    /* Grain Overlay */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.05;
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXl8fHx2dnZ9fX10dHRzcnJubm5lcHBycnJkb296enpzc3NjbGxlbm5ibGxtbW1lbW1pcXF7e3t3d3dh46rBAAAAB3RSTlMAMIDf8L/v59U9SgAAAD9JREFUeNpjYGRkZAFiZiAWAWIGYmQgLADECuS6BInS1YmwA7ECuS5BolAnIn0A8QC5LpG9YAtYH9ALOC5Anp8AAI6eAsE8X7Y6AAAAAElFTkSuQmCC');
+    }
+
+    /* Custom Cursor */
+    #cursor {
+      width: 20px;
+      height: 20px;
+      background: var(--zzz-neon);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+    }
+    #cursor-follower {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--zzz-neon);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    @media (max-width: 768px) {
+      #cursor, #cursor-follower { display: none; }
     }
 
     .zzz-label {
@@ -243,6 +328,9 @@
   </style>
 </head>
 <body>
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+  <div class="noise-overlay"></div>
   <div class="scanline"></div>
 
   <div id="mode-transition-overlay"></div>
@@ -357,6 +445,10 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Row 1 -->
       <div class="art-card group md:col-span-2 md:row-span-2" data-aos="fade-up">
+        <div class="tech-bracket tl"></div>
+        <div class="tech-bracket tr"></div>
+        <div class="tech-bracket bl"></div>
+        <div class="tech-bracket br"></div>
         <div class="relative overflow-hidden aspect-[4/5]">
           <img src="Рисунок2.jpg" class="w-full h-full object-cover">
         </div>
@@ -370,6 +462,8 @@
       </div>
 
       <div class="art-card group" data-aos="fade-up" data-aos-delay="100">
+        <div class="tech-bracket tl"></div>
+        <div class="tech-bracket br"></div>
         <div class="relative overflow-hidden aspect-square">
           <img src="Рисунок5.jpg" class="w-full h-full object-cover">
         </div>
@@ -381,6 +475,8 @@
       </div>
 
       <div class="art-card group" data-aos="fade-up" data-aos-delay="200">
+        <div class="tech-bracket tr"></div>
+        <div class="tech-bracket bl"></div>
         <div class="relative overflow-hidden aspect-square">
           <img src="Рисунок6.jpg" class="w-full h-full object-cover">
         </div>
@@ -393,6 +489,8 @@
 
       <!-- Row 2 -->
       <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="tech-bracket tl"></div>
+        <div class="tech-bracket br"></div>
         <div class="relative overflow-hidden aspect-video">
           <img src="Рисунок13.jpg" class="w-full h-full object-cover">
         </div>
@@ -418,6 +516,8 @@
       </div>
 
       <div class="art-card group md:col-span-2" data-aos="fade-up">
+        <div class="tech-bracket tr"></div>
+        <div class="tech-bracket bl"></div>
         <div class="relative overflow-hidden aspect-video">
           <img src="Рисунок15.jpg" class="w-full h-full object-cover">
         </div>
@@ -572,139 +672,177 @@
   </footer>
 
   <script>
-    // AOS
-    AOS.init({
-      once: true,
-      duration: 800,
-      offset: 100
-    });
+    /**
+     * Modern Portfolio Design System
+     * Includes: GSAP Custom Cursor, Mode Switching, and Reactive Layouts.
+     * Defensive coding used to ensure page remains functional if dependencies fail.
+     */
 
-    // Mode Toggle Logic
-    const brandToggle = document.getElementById('brand-toggle');
-    const overlay = document.getElementById('mode-transition-overlay');
-    const vibrantGlow = document.getElementById('vibrant-glow');
-    let isVibrant = false;
+    const initPortfolio = () => {
+      // Check if GSAP is available
+      const hasGSAP = typeof gsap !== 'undefined';
 
-    const updateModeContent = () => {
-      const mode = isVibrant ? 'vibrant' : 'classic';
+      // Custom Cursor Logic
+      const cursor = document.getElementById('cursor');
+      const follower = document.getElementById('cursor-follower');
 
-      // Update text content based on data attributes
-      document.querySelectorAll('[data-classic]').forEach(el => {
-        const newText = el.getAttribute(`data-${mode}`);
-        if (newText) {
-          el.textContent = newText;
-          if (el.classList.contains('glitch')) {
-            el.setAttribute('data-text', newText);
-          }
+      if (hasGSAP && window.matchMedia("(min-width: 769px)").matches) {
+        try {
+          gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+          gsap.set(follower, { xPercent: -50, yPercent: -50 });
+
+          window.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1, overwrite: 'auto' });
+            gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.3, overwrite: 'auto' });
+          });
+
+          // Only hide system cursor if initialization succeeded
+          document.body.classList.add('has-custom-cursor');
+        } catch (e) {
+          console.error("Custom cursor initialization failed", e);
         }
+      }
+
+      // Universal Hover Interactions
+      document.querySelectorAll('a, button, #brand-toggle, .art-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          if (hasGSAP && document.body.classList.contains('has-custom-cursor')) {
+            gsap.to(cursor, { scale: 2.5, duration: 0.3 });
+            gsap.to(follower, { scale: 1.5, opacity: 0.5, duration: 0.3 });
+          }
+        });
+        el.addEventListener('mouseleave', () => {
+          if (hasGSAP && document.body.classList.contains('has-custom-cursor')) {
+            gsap.to(cursor, { scale: 1, duration: 0.3 });
+            gsap.to(follower, { scale: 1, opacity: 1, duration: 0.3 });
+          }
+        });
       });
 
-      // Toggle icons
-      document.querySelectorAll('.classic-icon').forEach(el => {
-        el.classList.toggle('hidden', isVibrant);
-      });
-      document.querySelectorAll('.vibrant-icon').forEach(el => {
-        el.classList.toggle('hidden', !isVibrant);
-      });
+      // Mode Toggle Logic
+      const brandToggle = document.getElementById('brand-toggle');
+      const overlay = document.getElementById('mode-transition-overlay');
+      const vibrantGlow = document.getElementById('vibrant-glow');
+      let isVibrant = false;
 
-      // Update Lucide icons if they were hidden/shown
-      lucide.createIcons();
-    };
+      const updateModeContent = () => {
+        const mode = isVibrant ? 'vibrant' : 'classic';
 
-    brandToggle.addEventListener('click', () => {
-      // Trigger glitch transition
-      overlay.classList.add('glitch-flash');
-
-      const tl = gsap.timeline();
-
-      tl.to(overlay, { opacity: 1, duration: 0.1 })
-        .to("body", { x: 5, y: -5, duration: 0.05, repeat: 5, yoyo: true })
-        .set("body", { x: 0, y: 0 });
-
-      setTimeout(() => {
-        isVibrant = !isVibrant;
-        document.body.classList.toggle('vibrant-mode', isVibrant);
-        vibrantGlow.style.opacity = isVibrant ? "1" : "0";
-
-        updateModeContent();
-
-        gsap.to(overlay, {
-          opacity: 0,
-          duration: 0.4,
-          delay: 0.1,
-          onComplete: () => {
-            overlay.classList.remove('glitch-flash');
+        document.querySelectorAll('[data-classic]').forEach(el => {
+          const newText = el.getAttribute(`data-${mode}`);
+          if (newText) {
+            el.textContent = newText;
+            if (el.classList.contains('glitch')) {
+              el.setAttribute('data-text', newText);
+            }
           }
         });
 
-        // Entrance animation for content when switching
-        gsap.from("#hero-content > *", {
-          y: 20,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 0.5,
-          ease: isVibrant ? "back.out(1.7)" : "power2.out"
-        });
-      }, 250);
-    });
+        document.querySelectorAll('.classic-icon').forEach(el => el.classList.toggle('hidden', isVibrant));
+        document.querySelectorAll('.vibrant-icon').forEach(el => el.classList.toggle('hidden', !isVibrant));
 
-    // Initial icon render
-    lucide.createIcons();
-
-    // GSAP Entrance
-    gsap.from("#hero-content", {
-      duration: 1.5,
-      y: 30,
-      opacity: 0,
-      ease: "power3.out",
-      delay: 0.4
-    });
-
-    // Terminal Text Effect for BIO - only in vibrant mode
-    const bioText = document.querySelector('.text-xl.text-zinc-400');
-    if (bioText) {
-      const originalText = bioText.innerHTML;
-
-      const runTypewriter = () => {
-        if (!isVibrant) return;
-        bioText.innerHTML = "";
-        let i = 0;
-        function typeWriter() {
-          if (i < originalText.length && isVibrant) {
-            bioText.innerHTML += originalText.charAt(i);
-            i++;
-            setTimeout(typeWriter, 10);
-          }
-        }
-        typeWriter();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
       };
 
-      // Trigger when visible
-      const observer = new IntersectionObserver((entries) => {
-        if(entries[0].isIntersecting && isVibrant) {
-          runTypewriter();
-          observer.disconnect();
+      brandToggle.addEventListener('click', () => {
+        if (!hasGSAP) {
+          // Fallback toggle without animations
+          isVibrant = !isVibrant;
+          document.body.classList.toggle('vibrant-mode', isVibrant);
+          if (vibrantGlow) vibrantGlow.style.opacity = isVibrant ? "1" : "0";
+          updateModeContent();
+          return;
         }
-      }, { threshold: 0.5 });
-      observer.observe(bioText);
-    }
 
-    gsap.from(".zzz-label", {
-      duration: 0.8,
-      opacity: 0,
-      y: 20,
-      stagger: 0.2,
-      ease: "power2.out"
-    });
+        overlay.classList.add('glitch-flash');
+        const tl = gsap.timeline();
 
-    // Hover effect on art cards
-    document.querySelectorAll('.art-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        gsap.to(card.querySelector('img'), { scale: 1.1, duration: 0.6 });
+        tl.to(overlay, { opacity: 1, duration: 0.1 })
+          .to("body", { x: 5, y: -5, duration: 0.05, repeat: 5, yoyo: true })
+          .set("body", { x: 0, y: 0 });
+
+        setTimeout(() => {
+          isVibrant = !isVibrant;
+          document.body.classList.toggle('vibrant-mode', isVibrant);
+          if (vibrantGlow) vibrantGlow.style.opacity = isVibrant ? "1" : "0";
+
+          updateModeContent();
+
+          gsap.to(overlay, {
+            opacity: 0,
+            duration: 0.4,
+            delay: 0.1,
+            onComplete: () => overlay.classList.remove('glitch-flash')
+          });
+
+          gsap.from("#hero-content > *", {
+            y: 20,
+            opacity: 0,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: isVibrant ? "back.out(1.7)" : "power2.out"
+          });
+        }, 250);
       });
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card.querySelector('img'), { scale: 1, duration: 0.6 });
-      });
+
+      // Initial Entrance Animations
+      if (hasGSAP) {
+        gsap.from("#hero-content", { duration: 1.5, y: 30, opacity: 0, ease: "power3.out", delay: 0.4 });
+        gsap.from(".zzz-label", { duration: 0.8, opacity: 0, y: 20, stagger: 0.2, ease: "power2.out" });
+
+        document.querySelectorAll('.art-card').forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            const img = card.querySelector('img');
+            if (img) gsap.to(img, { scale: 1.1, duration: 0.6 });
+          });
+          card.addEventListener('mouseleave', () => {
+            const img = card.querySelector('img');
+            if (img) gsap.to(img, { scale: 1, duration: 0.6 });
+          });
+        });
+      }
+
+      // Terminal Text Effect for BIO
+      const bioText = document.querySelector('.text-xl.text-zinc-400');
+      if (bioText) {
+        const originalText = bioText.innerHTML;
+        const runTypewriter = () => {
+          if (!isVibrant) return;
+          bioText.innerHTML = "";
+          let i = 0;
+          const typeWriter = () => {
+            if (i < originalText.length && isVibrant) {
+              bioText.innerHTML += originalText.charAt(i);
+              i++;
+              setTimeout(typeWriter, 10);
+            }
+          };
+          typeWriter();
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          if(entries[0].isIntersecting && isVibrant) {
+            runTypewriter();
+            observer.disconnect();
+          }
+        }, { threshold: 0.5 });
+        observer.observe(bioText);
+      }
+    };
+
+    // Initialize once DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize AOS
+      if (typeof AOS !== 'undefined') {
+        AOS.init({ once: true, duration: 800, offset: 100 });
+      }
+
+      // Initialize Lucide
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+
+      initPortfolio();
     });
   </script>
 </body>
